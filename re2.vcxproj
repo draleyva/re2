@@ -75,7 +75,7 @@
     <IncludePath>.\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>c:\products\extern\src\re2;c:\products\core\src;c:\products\extern\src;$(FrameworkSDKDir)\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\;$(IncludePath)</IncludePath>
     <OutDir>$(OUTPUTDIR)\$(ProjectName)\$(Configuration)\$(PlatformArchitecture)</OutDir>
     <IntDir>$(OUTPUTDIR)\$(ProjectName)\$(Configuration)\$(PlatformArchitecture)</IntDir>
   </PropertyGroup>
@@ -88,7 +88,7 @@
     <IncludePath>.\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>c:\products\extern\src\re2;c:\products\core\src;c:\products\extern\src;$(ICInstallDir)compiler\include;$(ICInstallDir)compiler\include\ia32;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
+    <IncludePath>.\;$(IncludePath)</IncludePath>
     <OutDir>$(OUTPUTDIR)\$(ProjectName)\$(Configuration)\$(PlatformArchitecture)</OutDir>
     <IntDir>$(OUTPUTDIR)\$(ProjectName)\$(Configuration)\$(PlatformArchitecture)</IntDir>
   </PropertyGroup>
