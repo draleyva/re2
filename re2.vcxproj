@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>.\;$(IncludePath)</IncludePath>
-    <OutDir>$(OUTPUTDIR)\$(ProjectName)\$(Configuration)\$(PlatformArchitecture)</OutDir>
-    <IntDir>$(OUTPUTDIR)\$(ProjectName)\$(Configuration)\$(PlatformArchitecture)</IntDir>
+    <OutDir>$(OUTPUTDIR)\$(ProjectName)\$(PlatformArchitecture)\$(Configuration)</OutDir>
+    <IntDir>$(OUTPUTDIR)\$(ProjectName)\$(PlatformArchitecture)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(OUTPUTDIR)\$(ProjectName)\$(PlatformArchitecture)\$(Configuration)</OutDir>
@@ -89,8 +89,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>.\;$(IncludePath)</IncludePath>
-    <OutDir>$(OUTPUTDIR)\$(ProjectName)\$(Configuration)\$(PlatformArchitecture)</OutDir>
-    <IntDir>$(OUTPUTDIR)\$(ProjectName)\$(Configuration)\$(PlatformArchitecture)</IntDir>
+    <OutDir>$(OUTPUTDIR)\$(ProjectName)\$(PlatformArchitecture)\$(Configuration)</OutDir>
+    <IntDir>$(OUTPUTDIR)\$(ProjectName)\$(PlatformArchitecture)\$(Configuration)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
