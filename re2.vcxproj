@@ -125,7 +125,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <OutputFile>../../lib$(PlatformArchitecture)/$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>../../lib$(PlatformArchitecture)/$(Configuration)/$(ProjectName)$(TargetExt)</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -168,7 +168,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <OutputFile>../../lib$(PlatformArchitecture)/$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>../../lib$(PlatformArchitecture)/$(Configuration)/$(ProjectName)$(TargetExt)</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
