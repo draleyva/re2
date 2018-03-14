@@ -96,9 +96,6 @@
     <ClCompile Include="util\test.cc">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="RE2Services.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="re2\filtered_re2.h">
@@ -160,9 +157,6 @@
     </ClInclude>
     <ClInclude Include="util\util.h">
       <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="RE2Services.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
