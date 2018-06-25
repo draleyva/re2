@@ -29,7 +29,7 @@ bool Regexp::SimplifyRegexp(const StringPiece& src, ParseFlags flags,
   re->Decref();
   if (sre == NULL) {
     // Should not happen, since Simplify never fails.
-    LOG(ERROR) << "Simplify failed on " << src;
+    //LOG(ERROR) << "Simplify failed on " << src;
     if (status) {
       status->set_code(kRegexpInternalError);
       status->set_error_arg(src);
@@ -96,7 +96,7 @@ bool Regexp::ComputeSimple() {
     case kRegexpRepeat:
       return false;
   }
-  LOG(DFATAL) << "Case not handled in ComputeSimple: " << op_;
+  //LOG(DFATAL) << "Case not handled in ComputeSimple: " << op_;
   return false;
 }
 
@@ -214,7 +214,7 @@ Regexp* CoalesceWalker::Copy(Regexp* re) {
 Regexp* CoalesceWalker::ShortVisit(Regexp* re, Regexp* parent_arg) {
   // This should never be called, since we use Walk and not
   // WalkExponential.
-  LOG(DFATAL) << "CoalesceWalker::ShortVisit called";
+  //LOG(DFATAL) << "CoalesceWalker::ShortVisit called";
   return re->Incref();
 }
 
@@ -362,7 +362,7 @@ void CoalesceWalker::DoCoalesce(Regexp** r1ptr, Regexp** r2ptr) {
       break;
 
     default:
-      LOG(DFATAL) << "DoCoalesce failed: r1->op() is " << r1->op();
+      //LOG(DFATAL) << "DoCoalesce failed: r1->op() is " << r1->op();
       nre->Decref();
       return;
   }
@@ -423,7 +423,7 @@ void CoalesceWalker::DoCoalesce(Regexp** r1ptr, Regexp** r2ptr) {
     }
 
     default:
-      LOG(DFATAL) << "DoCoalesce failed: r2->op() is " << r2->op();
+      //LOG(DFATAL) << "DoCoalesce failed: r2->op() is " << r2->op();
       nre->Decref();
       return;
   }
@@ -439,7 +439,7 @@ Regexp* SimplifyWalker::Copy(Regexp* re) {
 Regexp* SimplifyWalker::ShortVisit(Regexp* re, Regexp* parent_arg) {
   // This should never be called, since we use Walk and not
   // WalkExponential.
-  LOG(DFATAL) << "SimplifyWalker::ShortVisit called";
+  //LOG(DFATAL) << "SimplifyWalker::ShortVisit called";
   return re->Incref();
 }
 
@@ -554,7 +554,7 @@ Regexp* SimplifyWalker::PostVisit(Regexp* re,
     }
   }
 
-  LOG(ERROR) << "Simplify case not handled: " << re->op();
+  //LOG(ERROR) << "Simplify case not handled: " << re->op();
   return re->Incref();
 }
 
@@ -634,7 +634,7 @@ Regexp* SimplifyWalker::SimplifyRepeat(Regexp* re, int min, int max,
   if (nre == NULL) {
     // Some degenerate case, like min > max, or min < max < 0.
     // This shouldn't happen, because the parser rejects such regexps.
-    LOG(DFATAL) << "Malformed repeat " << re->ToString() << " " << min << " " << max;
+    //LOG(DFATAL) << "Malformed repeat " << re->ToString() << " " << min << " " << max;
     return new Regexp(kRegexpNoMatch, f);
   }
 

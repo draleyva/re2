@@ -50,9 +50,9 @@
 #define LOG_DFATAL LOG_FATAL
 #endif
 
-#define LOG(severity) LOG_ ## severity.stream()
+#define LOG(severity) //LOG_ ## severity.stream()
 
-#define VLOG(x) if((x)>0){}else LOG_INFO.stream()
+#define VLOG(x) //if((x)>0){}else LOG_INFO.stream()
 
 class LogMessage {
  public:

@@ -158,5 +158,11 @@
     <ClInclude Include="util\util.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="util\strutil.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="re2\bitmap256.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

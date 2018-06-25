@@ -866,7 +866,7 @@ void DFA::AddToQueue(Workq* q, int id, uint32_t flag) {
     Prog::Inst* ip = prog_->inst(id);
     switch (ip->opcode()) {
       default:
-        LOG(DFATAL) << "unhandled opcode: " << ip->opcode();
+        //LOG(DFATAL) << "unhandled opcode: " << ip->opcode();
         break;
 
       case kInstByteRange:  // just save these on the queue
@@ -955,7 +955,7 @@ void DFA::RunWorkqOnByte(Workq* oldq, Workq* newq,
     Prog::Inst* ip = prog_->inst(id);
     switch (ip->opcode()) {
       default:
-        LOG(DFATAL) << "unhandled opcode: " << ip->opcode();
+        //LOG(DFATAL) << "unhandled opcode: " << ip->opcode();
         break;
 
       case kInstFail:        // never succeeds
@@ -1010,14 +1010,14 @@ DFA::State* DFA::RunStateOnByte(State* state, int c) {
       return FullMatchState;
     }
     if (state == DeadState) {
-      LOG(DFATAL) << "DeadState in RunStateOnByte";
+      //LOG(DFATAL) << "DeadState in RunStateOnByte";
       return NULL;
     }
     if (state == NULL) {
-      LOG(DFATAL) << "NULL state in RunStateOnByte";
+      //LOG(DFATAL) << "NULL state in RunStateOnByte";
       return NULL;
     }
-    LOG(DFATAL) << "Unexpected special state in RunStateOnByte";
+    //LOG(DFATAL) << "Unexpected special state in RunStateOnByte";
     return NULL;
   }
 
@@ -1245,7 +1245,7 @@ DFA::State* DFA::StateSaver::Restore() {
   MutexLock l(&dfa_->mutex_);
   State* s = dfa_->CachedState(inst_, ninst_, flag_);
   if (s == NULL)
-    LOG(DFATAL) << "StateSaver failed to restore state.";
+    //LOG(DFATAL) << "StateSaver failed to restore state.";
   return s;
 }
 
@@ -1436,13 +1436,13 @@ inline bool DFA::InlinedSearchLoop(SearchParams* params,
         // Restore start and s so we can continue.
         if ((start = save_start.Restore()) == NULL ||
             (s = save_s.Restore()) == NULL) {
-          // Restore already did LOG(DFATAL).
+          // Restore already did //LOG(DFATAL).
           params->failed = true;
           return false;
         }
         ns = RunStateOnByteUnlocked(s, c);
         if (ns == NULL) {
-          LOG(DFATAL) << "RunStateOnByteUnlocked failed after ResetCache";
+          //LOG(DFATAL) << "RunStateOnByteUnlocked failed after ResetCache";
           params->failed = true;
           return false;
         }
@@ -1515,7 +1515,7 @@ inline bool DFA::InlinedSearchLoop(SearchParams* params,
       }
       ns = RunStateOnByteUnlocked(s, lastbyte);
       if (ns == NULL) {
-        LOG(DFATAL) << "RunStateOnByteUnlocked failed after Reset";
+        //LOG(DFATAL) << "RunStateOnByteUnlocked failed after Reset";
         params->failed = true;
         return false;
       }
@@ -1641,7 +1641,7 @@ bool DFA::AnalyzeSearch(SearchParams* params) {
 
   // Sanity check: make sure that text lies within context.
   if (text.begin() < context.begin() || text.end() > context.end()) {
-    LOG(DFATAL) << "context does not contain text";
+    //LOG(DFATAL) << "context does not contain text";
     params->start = DeadState;
     return true;
   }
@@ -1688,7 +1688,7 @@ bool DFA::AnalyzeSearch(SearchParams* params) {
   if (!AnalyzeSearchHelper(params, info, flags)) {
     ResetCache(params->cache_lock);
     if (!AnalyzeSearchHelper(params, info, flags)) {
-      LOG(DFATAL) << "Failed to analyze start state.";
+      //LOG(DFATAL) << "Failed to analyze start state.";
       params->failed = true;
       return false;
     }

@@ -347,7 +347,7 @@ static void AddFoldedRange(CharClassBuilder* cc, Rune lo, Rune hi, int depth) {
   // current Unicode tables.  make_unicode_casefold.py checks that
   // the cycles are not too long, and we double-check here using depth.
   if (depth > 10) {
-    LOG(DFATAL) << "AddFoldedRange recurses too much.";
+    //LOG(DFATAL) << "AddFoldedRange recurses too much.";
     return;
   }
 
@@ -557,7 +557,7 @@ int RepetitionWalker::PostVisit(Regexp* re, int parent_arg, int pre_arg,
 int RepetitionWalker::ShortVisit(Regexp* re, int parent_arg) {
   // This should never be called, since we use Walk and not
   // WalkExponential.
-  LOG(DFATAL) << "RepetitionWalker::ShortVisit called";
+  //LOG(DFATAL) << "RepetitionWalker::ShortVisit called";
   return 0;
 }
 
@@ -842,7 +842,7 @@ void Regexp::RemoveLeadingString(Regexp* re, int n) {
         case 0:
         case 1:
           // Impossible.
-          LOG(DFATAL) << "Concat of " << re->nsub();
+          //LOG(DFATAL) << "Concat of " << re->nsub();
           re->submany_ = NULL;
           re->op_ = kRegexpEmptyMatch;
           break;
@@ -972,7 +972,7 @@ int Regexp::FactorAlternation(Regexp** sub, int nsub, ParseFlags flags) {
             i += iter->nsub;
             break;
           default:
-            LOG(DFATAL) << "unknown round: " << round;
+            //LOG(DFATAL) << "unknown round: " << round;
             break;
         }
         // If we are done, copy until the end of sub.
@@ -1011,7 +1011,7 @@ int Regexp::FactorAlternation(Regexp** sub, int nsub, ParseFlags flags) {
           continue;
         }
       default:
-        LOG(DFATAL) << "unknown round: " << round;
+        //LOG(DFATAL) << "unknown round: " << round;
         break;
     }
 
@@ -1178,8 +1178,7 @@ void FactorAlternationImpl::Round3(Regexp** sub, int nsub,
         } else if (re->op() == kRegexpLiteral) {
           ccb.AddRangeFlags(re->rune(), re->rune(), re->parse_flags());
         } else {
-          LOG(DFATAL) << "RE2: unexpected op: " << re->op() << " "
-                      << re->ToString();
+          //LOG(DFATAL) << "RE2: unexpected op: " << re->op() << " " << re->ToString();
         }
         re->Decref();
       }
@@ -1438,7 +1437,7 @@ static int UnHex(int c) {
     return c - 'A' + 10;
   if ('a' <= c && c <= 'f')
     return c - 'a' + 10;
-  LOG(DFATAL) << "Bad hex digit " << c;
+  //LOG(DFATAL) << "Bad hex digit " << c;
   return 0;
 }
 
@@ -1584,7 +1583,7 @@ static bool ParseEscape(StringPiece* s, Rune* rp,
     //   return true;
   }
 
-  LOG(DFATAL) << "Not reached in ParseEscape.";
+  //LOG(DFATAL) << "Not reached in ParseEscape.";
 
 BadEscape:
   // Unrecognized escape sequence.
@@ -2040,7 +2039,7 @@ bool Regexp::ParseState::ParsePerlFlags(StringPiece* s) {
 
   // Caller is supposed to check this.
   if (!(flags_ & PerlX) || t.size() < 2 || t[0] != '(' || t[1] != '?') {
-    LOG(DFATAL) << "Bad call to ParseState::ParsePerlFlags";
+    //LOG(DFATAL) << "Bad call to ParseState::ParsePerlFlags";
     status_->set_code(kRegexpInternalError);
     return false;
   }

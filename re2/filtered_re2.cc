@@ -37,8 +37,7 @@ RE2::ErrorCode FilteredRE2::Add(const StringPiece& pattern,
 
   if (!re->ok()) {
     if (options.log_errors()) {
-      LOG(ERROR) << "Couldn't compile regular expression, skipping: "
-                 << re << " due to error " << re->error();
+      //LOG(ERROR) << "Couldn't compile regular expression, skipping: " << re << " due to error " << re->error();
     }
     delete re;
   } else {
@@ -51,12 +50,12 @@ RE2::ErrorCode FilteredRE2::Add(const StringPiece& pattern,
 
 void FilteredRE2::Compile(std::vector<string>* atoms) {
   if (compiled_) {
-    LOG(ERROR) << "Compile called already.";
+    //LOG(ERROR) << "Compile called already.";
     return;
   }
 
   if (re2_vec_.empty()) {
-    LOG(ERROR) << "Compile called before Add.";
+    //LOG(ERROR) << "Compile called before Add.";
     return;
   }
 
@@ -79,7 +78,7 @@ int FilteredRE2::SlowFirstMatch(const StringPiece& text) const {
 int FilteredRE2::FirstMatch(const StringPiece& text,
                             const std::vector<int>& atoms) const {
   if (!compiled_) {
-    LOG(DFATAL) << "FirstMatch called before Compile.";
+    //LOG(DFATAL) << "FirstMatch called before Compile.";
     return -1;
   }
   std::vector<int> regexps;

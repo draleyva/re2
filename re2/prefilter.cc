@@ -454,9 +454,9 @@ typedef CharClass::iterator CCIter;
 Prefilter::Info* Prefilter::Info::CClass(CharClass *cc,
                                          bool latin1) {
   if (ExtraDebug) {
-    LOG(ERROR) << "CharClassInfo:";
-    for (CCIter i = cc->begin(); i != cc->end(); ++i)
-      LOG(ERROR) << "  " << i->lo << "-" << i->hi;
+    //LOG(ERROR) << "CharClassInfo:";
+    //for (CCIter i = cc->begin(); i != cc->end(); ++i)
+      //LOG(ERROR) << "  " << i->lo << "-" << i->hi;
   }
 
   // If the class is too large, it's okay to overestimate.
@@ -476,8 +476,8 @@ Prefilter::Info* Prefilter::Info::CClass(CharClass *cc,
 
   a->is_exact_ = true;
 
-  if (ExtraDebug)
-    LOG(ERROR) << " = " << a->ToString();
+  //if (ExtraDebug)
+    //LOG(ERROR) << " = " << a->ToString();
 
   return a;
 }
@@ -504,8 +504,8 @@ class Prefilter::Info::Walker : public Regexp::Walker<Prefilter::Info*> {
 };
 
 Prefilter::Info* Prefilter::BuildInfo(Regexp* re) {
-  if (ExtraDebug)
-    LOG(ERROR) << "BuildPrefilter::Info: " << re->ToString();
+  //if (ExtraDebug)
+    //LOG(ERROR) << "BuildPrefilter::Info: " << re->ToString();
 
   bool latin1 = (re->parse_flags() & Regexp::Latin1) != 0;
   Prefilter::Info::Walker w(latin1);
@@ -534,7 +534,7 @@ Prefilter::Info* Prefilter::Info::Walker::PostVisit(
   switch (re->op()) {
     default:
     case kRegexpRepeat:
-      LOG(DFATAL) << "Bad regexp op " << re->op();
+      //LOG(DFATAL) << "Bad regexp op " << re->op();
       info = EmptyString();
       break;
 
@@ -636,9 +636,8 @@ Prefilter::Info* Prefilter::Info::Walker::PostVisit(
       break;
   }
 
-  if (ExtraDebug)
-    LOG(ERROR) << "BuildInfo " << re->ToString()
-               << ": " << (info ? info->ToString() : "");
+  //if (ExtraDebug)
+    //LOG(ERROR) << "BuildInfo " << re->ToString() << ": " << (info ? info->ToString() : "");
 
   return info;
 }
@@ -664,7 +663,7 @@ Prefilter* Prefilter::FromRegexp(Regexp* re) {
 string Prefilter::DebugString() const {
   switch (op_) {
     default:
-      LOG(DFATAL) << "Bad op in Prefilter::DebugString: " << op_;
+      //LOG(DFATAL) << "Bad op in Prefilter::DebugString: " << op_;
       return StringPrintf("op%d", op_);
     case NONE:
       return "*no-matches*";

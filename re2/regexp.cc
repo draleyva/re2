@@ -44,7 +44,7 @@ Regexp::Regexp(RegexpOp op, ParseFlags parse_flags)
 // required Decref() to have handled them for us.
 Regexp::~Regexp() {
   if (nsub_ > 0)
-    LOG(DFATAL) << "Regexp not destroyed.";
+    //LOG(DFATAL) << "Regexp not destroyed.";
 
   switch (op_) {
     default:
@@ -143,7 +143,7 @@ void Regexp::Destroy() {
     Regexp* re = stack;
     stack = re->down_;
     if (re->ref_ != 0)
-      LOG(DFATAL) << "Bad reference count " << re->ref_;
+      //LOG(DFATAL) << "Bad reference count " << re->ref_;
     if (re->nsub_ > 0) {
       Regexp** subs = re->sub();
       for (int i = 0; i < re->nsub_; i++) {
@@ -406,7 +406,7 @@ static bool TopEqual(Regexp* a, Regexp* b) {
     }
   }
 
-  LOG(DFATAL) << "Unexpected op in Regexp::Equal: " << a->op();
+  //LOG(DFATAL) << "Unexpected op in Regexp::Equal: " << a->op();
   return 0;
 }
 
@@ -544,7 +544,7 @@ class NumCapturesWalker : public Regexp::Walker<Ignored> {
   }
   virtual Ignored ShortVisit(Regexp* re, Ignored ignored) {
     // Should never be called: we use Walk not WalkExponential.
-    LOG(DFATAL) << "NumCapturesWalker::ShortVisit called";
+    //LOG(DFATAL) << "NumCapturesWalker::ShortVisit called";
     return ignored;
   }
 
@@ -590,7 +590,7 @@ class NamedCapturesWalker : public Regexp::Walker<Ignored> {
 
   virtual Ignored ShortVisit(Regexp* re, Ignored ignored) {
     // Should never be called: we use Walk not WalkExponential.
-    LOG(DFATAL) << "NamedCapturesWalker::ShortVisit called";
+    //LOG(DFATAL) << "NamedCapturesWalker::ShortVisit called";
     return ignored;
   }
 
@@ -632,7 +632,7 @@ class CaptureNamesWalker : public Regexp::Walker<Ignored> {
 
   virtual Ignored ShortVisit(Regexp* re, Ignored ignored) {
     // Should never be called: we use Walk not WalkExponential.
-    LOG(DFATAL) << "CaptureNamesWalker::ShortVisit called";
+    //LOG(DFATAL) << "CaptureNamesWalker::ShortVisit called";
     return ignored;
   }
 

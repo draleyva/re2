@@ -34,7 +34,7 @@ RE2::Set::~Set() {
 
 int RE2::Set::Add(const StringPiece& pattern, string* error) {
   if (compiled_) {
-    LOG(DFATAL) << "RE2::Set::Add() called after compiling";
+    //LOG(DFATAL) << "RE2::Set::Add() called after compiling";
     return -1;
   }
 
@@ -46,7 +46,7 @@ int RE2::Set::Add(const StringPiece& pattern, string* error) {
     if (error != NULL)
       *error = status.Text();
     if (options_.log_errors())
-      LOG(ERROR) << "Error parsing '" << pattern << "': " << status.Text();
+      //LOG(ERROR) << "Error parsing '" << pattern << "': " << status.Text();
     return -1;
   }
 
@@ -74,7 +74,7 @@ int RE2::Set::Add(const StringPiece& pattern, string* error) {
 
 bool RE2::Set::Compile() {
   if (compiled_) {
-    LOG(DFATAL) << "RE2::Set::Compile() called more than once";
+    //LOG(DFATAL) << "RE2::Set::Compile() called more than once";
     return false;
   }
   compiled_ = true;
@@ -110,7 +110,7 @@ bool RE2::Set::Match(const StringPiece& text, std::vector<int>* v) const {
 bool RE2::Set::Match(const StringPiece& text, std::vector<int>* v,
                      ErrorInfo* error_info) const {
   if (!compiled_) {
-    LOG(DFATAL) << "RE2::Set::Match() called before compiling";
+    //LOG(DFATAL) << "RE2::Set::Match() called before compiling";
     if (error_info != NULL)
       error_info->kind = kNotCompiled;
     return false;
@@ -124,10 +124,8 @@ bool RE2::Set::Match(const StringPiece& text, std::vector<int>* v,
   bool ret = prog_->SearchDFA(text, text, Prog::kAnchored, Prog::kManyMatch,
                               NULL, &dfa_failed, matches.get());
   if (dfa_failed) {
-    if (options_.log_errors())
-      LOG(ERROR) << "DFA out of memory: size " << prog_->size() << ", "
-                 << "bytemap range " << prog_->bytemap_range() << ", "
-                 << "list count " << prog_->list_count();
+    //if (options_.log_errors())
+      //LOG(ERROR) << "DFA out of memory: size " << prog_->size() << ", " << "bytemap range " << prog_->bytemap_range() << ", " << "list count " << prog_->list_count();
     if (error_info != NULL)
       error_info->kind = kOutOfMemory;
     return false;
@@ -139,7 +137,7 @@ bool RE2::Set::Match(const StringPiece& text, std::vector<int>* v,
   }
   if (v != NULL) {
     if (matches->empty()) {
-      LOG(DFATAL) << "RE2::Set::Match() matched, but no matches returned?!";
+      //LOG(DFATAL) << "RE2::Set::Match() matched, but no matches returned?!";
       if (error_info != NULL)
         error_info->kind = kInconsistent;
       return false;

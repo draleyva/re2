@@ -43,7 +43,7 @@ class PCREWalker : public Regexp::Walker<bool> {
 
   bool ShortVisit(Regexp* re, bool a) {
     // Should never be called: we use Walk not WalkExponential.
-    LOG(DFATAL) << "EmptyStringWalker::ShortVisit called";
+    //LOG(DFATAL) << "EmptyStringWalker::ShortVisit called";
     return a;
   }
 };
@@ -120,7 +120,7 @@ class EmptyStringWalker : public Regexp::Walker<bool> {
 
   bool ShortVisit(Regexp* re, bool a) {
     // Should never be called: we use Walk not WalkExponential.
-    LOG(DFATAL) << "EmptyStringWalker::ShortVisit called";
+    //LOG(DFATAL) << "EmptyStringWalker::ShortVisit called";
     return a;
   }
 

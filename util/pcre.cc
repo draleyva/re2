@@ -28,7 +28,7 @@
 #pragma GCC diagnostic ignored "-Wmisleading-indentation"
 #endif
 
-#define PCREPORT(level) LOG(level)
+#define PCREPORT(level) //LOG(level)
 
 // Default PCRE limits.
 // Defaults chosen to allow a plausible amount of CPU and
@@ -115,8 +115,7 @@ void PCRE::Init(const char* pattern, Option options, int match_limit,
 
   if (options & ~(EnabledCompileOptions | EnabledExecOptions)) {
     error_ = new string("illegal regexp option");
-    PCREPORT(ERROR)
-        << "Error compiling '" << pattern << "': illegal regexp option";
+    // PCREPORT(ERROR) << "Error compiling '" << pattern << "': illegal regexp option";
   } else {
     re_partial_ = Compile(UNANCHORED);
     if (re_partial_ != NULL) {
@@ -185,7 +184,7 @@ pcre* PCRE::Compile(Anchor anchor) {
   }
   if (re == NULL) {
     if (error_ == &empty_string) error_ = new string(error);
-    PCREPORT(ERROR) << "Error compiling '" << pattern_ << "': " << error;
+    // PCREPORT(ERROR) << "Error compiling '" << pattern_ << "': " << error;
   }
   return re;
 }
@@ -517,7 +516,7 @@ int PCRE::TryMatch(const StringPiece& text,
                    int vecsize) const {
   pcre* re = (anchor == ANCHOR_BOTH) ? re_full_ : re_partial_;
   if (re == NULL) {
-    PCREPORT(ERROR) << "Matching against invalid re: " << *error_;
+    //PCREPORT(ERROR) << "Matching against invalid re: " << *error_;
     return 0;
   }
 
@@ -572,16 +571,12 @@ int PCRE::TryMatch(const StringPiece& text,
         // are using the PCRE, but the flag is only intended
         // for use by unit tests anyway, so we let it go.
         hit_limit_ = true;
-        PCREPORT(WARNING) << "Exceeded match limit of " << match_limit
-                        << " when matching '" << pattern_ << "'"
-                        << " against text that is " << text.size() << " bytes.";
+        //PCREPORT(WARNING) << "Exceeded match limit of " << match_limit << " when matching '" << pattern_ << "'" << " against text that is " << text.size() << " bytes.";
         return 0;
       case PCRE_ERROR_RECURSIONLIMIT:
         // See comment about hit_limit above.
         hit_limit_ = true;
-        PCREPORT(WARNING) << "Exceeded stack limit of " << stack_limit
-                        << " when matching '" << pattern_ << "'"
-                        << " against text that is " << text.size() << " bytes.";
+        //PCREPORT(WARNING) << "Exceeded stack limit of " << stack_limit << " when matching '" << pattern_ << "'" << " against text that is " << text.size() << " bytes.";
         return 0;
       default:
         // There are other return codes from pcre.h :
@@ -592,12 +587,7 @@ int PCRE::TryMatch(const StringPiece& text,
         // PCRE_ERROR_NOMEMORY       (-6)
         // PCRE_ERROR_NOSUBSTRING    (-7)
         // ...
-        PCREPORT(ERROR) << "Unexpected return code: " << rc
-                      << " when matching '" << pattern_ << "'"
-                      << ", re=" << re
-                      << ", text=" << text
-                      << ", vec=" << vec
-                      << ", vecsize=" << vecsize;
+        //PCREPORT(ERROR) << "Unexpected return code: " << rc << " when matching '" << pattern_ << "'" << ", re=" << re << ", text=" << text << ", vec=" << vec << ", vecsize=" << vecsize;
         return 0;
     }
   }
@@ -683,8 +673,7 @@ bool PCRE::Rewrite(string *out, const StringPiece &rewrite,
             // unmatched optional capturing group. treat
             // its value as empty string; i.e., nothing to append.
           } else {
-            PCREPORT(ERROR) << "requested group " << n
-                          << " in regexp " << rewrite.data();
+            //PCREPORT(ERROR) << "requested group " << n << " in regexp " << rewrite.data();
             return false;
           }
         }
@@ -694,7 +683,7 @@ bool PCRE::Rewrite(string *out, const StringPiece &rewrite,
       } else if (c == '\\') {
         out->push_back('\\');
       } else {
-        PCREPORT(ERROR) << "invalid rewrite pattern: " << rewrite.data();
+        //PCREPORT(ERROR) << "invalid rewrite pattern: " << rewrite.data();
         return false;
       }
     } else {
@@ -752,7 +741,7 @@ int PCRE::NumberOfCapturingGroups() const {
                          PCRE_INFO_CAPTURECOUNT,
                          &result);
   if (rc != 0) {
-    PCREPORT(ERROR) << "Unexpected return code: " << rc;
+    //PCREPORT(ERROR) << "Unexpected return code: " << rc;
     return -1;
   }
   return result;

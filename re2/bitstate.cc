@@ -114,7 +114,7 @@ bool BitState::GrowStack() {
   delete[] job_;
   job_ = newjob;
   if (njob_ >= maxjob_) {
-    LOG(DFATAL) << "Job stack overflow.";
+    //LOG(DFATAL) << "Job stack overflow.";
     return false;
   }
   return true;
@@ -181,7 +181,7 @@ bool BitState::TrySearch(int id0, const char* p0) {
     Prog::Inst* ip = prog_->inst(id);
     switch (ip->opcode()) {
       default:
-        LOG(DFATAL) << "Unexpected opcode: " << ip->opcode() << " arg " << arg;
+        //LOG(DFATAL) << "Unexpected opcode: " << ip->opcode() << " arg " << arg;
         return false;
 
       case kInstFail:
@@ -211,7 +211,7 @@ bool BitState::TrySearch(int id0, const char* p0) {
             inaltmatch = false;
             continue;
         }
-        LOG(DFATAL) << "Bad arg in kInstAltMatch: " << arg;
+        //LOG(DFATAL) << "Bad arg in kInstAltMatch: " << arg;
         continue;
 
       case kInstByteRange: {
@@ -249,7 +249,7 @@ bool BitState::TrySearch(int id0, const char* p0) {
             cap_[ip->cap()] = p;
             continue;
         }
-        LOG(DFATAL) << "Bad arg in kInstCapture: " << arg;
+        //LOG(DFATAL) << "Bad arg in kInstCapture: " << arg;
         continue;
 
       case kInstEmptyWidth:

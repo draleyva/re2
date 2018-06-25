@@ -254,7 +254,7 @@ void NFA::AddToThreadq(Threadq* q, int id0, int c, int flag,
     Prog::Inst* ip = prog_->inst(id);
     switch (ip->opcode()) {
     default:
-      LOG(DFATAL) << "unhandled " << ip->opcode() << " in AddToThreadq";
+      //LOG(DFATAL) << "unhandled " << ip->opcode() << " in AddToThreadq";
       break;
 
     case kInstFail:
@@ -356,7 +356,7 @@ int NFA::Step(Threadq* runq, Threadq* nextq, int c, int flag, const char* p) {
     switch (ip->opcode()) {
       default:
         // Should only see the values handled below.
-        LOG(DFATAL) << "Unhandled " << ip->opcode() << " in step";
+        //LOG(DFATAL) << "Unhandled " << ip->opcode() << " in step";
         break;
 
       case kInstByteRange:
@@ -453,7 +453,7 @@ bool NFA::Search(const StringPiece& text, const StringPiece& const_context,
 
   // Sanity check: make sure that text lies within context.
   if (text.begin() < context.begin() || text.end() > context.end()) {
-    LOG(DFATAL) << "context does not contain text";
+    //LOG(DFATAL) << "context does not contain text";
     return false;
   }
 
@@ -469,7 +469,7 @@ bool NFA::Search(const StringPiece& text, const StringPiece& const_context,
   }
 
   if (nsubmatch < 0) {
-    LOG(DFATAL) << "Bad args: nsubmatch=" << nsubmatch;
+    //LOG(DFATAL) << "Bad args: nsubmatch=" << nsubmatch;
     return false;
   }
 
@@ -564,7 +564,7 @@ bool NFA::Search(const StringPiece& text, const StringPiece& const_context,
         Prog::Inst* ip = prog_->inst(id);
         switch (ip->opcode()) {
           default:
-            LOG(DFATAL) << "Unexpected opcode in short circuit: " << ip->opcode();
+            //LOG(DFATAL) << "Unexpected opcode in short circuit: " << ip->opcode();
             break;
 
           case kInstCapture:
@@ -655,7 +655,7 @@ int Prog::ComputeFirstByte() {
     Prog::Inst* ip = inst(id);
     switch (ip->opcode()) {
       default:
-        LOG(DFATAL) << "unhandled " << ip->opcode() << " in ComputeFirstByte";
+        //LOG(DFATAL) << "unhandled " << ip->opcode() << " in ComputeFirstByte";
         break;
 
       case kInstMatch:
@@ -748,7 +748,7 @@ void Prog::Fanout(SparseArray<int>* fanout) {
       Prog::Inst* ip = inst(id);
       switch (ip->opcode()) {
         default:
-          LOG(DFATAL) << "unhandled " << ip->opcode() << " in Prog::Fanout()";
+          //LOG(DFATAL) << "unhandled " << ip->opcode() << " in Prog::Fanout()";
           break;
 
         case kInstByteRange:

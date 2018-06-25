@@ -629,7 +629,7 @@ Frag Compiler::FindByteRange(int root, int id) {
       return NoMatch();
   }
 
-  LOG(DFATAL) << "should never happen";
+  //LOG(DFATAL) << "should never happen";
   return NoMatch();
 }
 
@@ -812,7 +812,7 @@ void Compiler::AddRuneRangeUTF8(Rune lo, Rune hi, bool foldcase) {
 // Should not be called.
 Frag Compiler::Copy(Frag arg) {
   // We're using WalkExponential; there should be no copying.
-  LOG(DFATAL) << "Compiler::Copy called!";
+  //LOG(DFATAL) << "Compiler::Copy called!";
   failed_ = true;
   return NoMatch();
 }
@@ -939,7 +939,7 @@ Frag Compiler::PostVisit(Regexp* re, Frag, Frag, Frag* child_frags,
       CharClass* cc = re->cc();
       if (cc->empty()) {
         // This can't happen.
-        LOG(DFATAL) << "No ranges in char class";
+        //LOG(DFATAL) << "No ranges in char class";
         failed_ = true;
         return NoMatch();
       }
@@ -997,7 +997,7 @@ Frag Compiler::PostVisit(Regexp* re, Frag, Frag, Frag* child_frags,
     case kRegexpNoWordBoundary:
       return EmptyWidth(kEmptyNonWordBoundary);
   }
-  LOG(DFATAL) << "Missing case in Compiler: " << re->op();
+  //LOG(DFATAL) << "Missing case in Compiler: " << re->op();
   failed_ = true;
   return NoMatch();
 }

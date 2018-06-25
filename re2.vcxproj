@@ -196,9 +196,15 @@
     <ClCompile Include="util\pcre.cc" />
     <ClCompile Include="util\rune.cc" />
     <ClCompile Include="util\strutil.cc" />
-    <ClCompile Include="util\test.cc" />
+    <ClCompile Include="util\test.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="re2\bitmap256.h" />
     <ClInclude Include="re2\filtered_re2.h" />
     <ClInclude Include="re2\prefilter.h" />
     <ClInclude Include="re2\prefilter_tree.h" />
@@ -216,6 +222,7 @@
     <ClInclude Include="util\mutex.h" />
     <ClInclude Include="util\sparse_array.h" />
     <ClInclude Include="util\sparse_set.h" />
+    <ClInclude Include="util\strutil.h" />
     <ClInclude Include="util\test.h" />
     <ClInclude Include="util\utf.h" />
     <ClInclude Include="util\util.h" />
